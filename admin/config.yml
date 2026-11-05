@@ -1,0 +1,69 @@
+# Podešavanje admin panela (Decap CMS)
+# >>> Promeni TVOJ-GITHUB-NALOG u svoje GitHub korisničko ime <<<
+backend:
+  name: github
+  repo: TVOJ-GITHUB-NALOG/outcast-shopper
+  branch: main
+  commit_messages:
+    update: "Izmena: {{slug}}"
+
+locale: hr
+site_url: /
+logo_url: /logo.png
+
+# Gde se čuvaju slike koje otpremiš
+media_folder: slike/uploads
+public_folder: /slike/uploads
+
+collections:
+  - name: sadrzaj
+    label: Sadržaj sajta
+    editor:
+      preview: false
+    files:
+      - name: proizvodi
+        label: Predlozi iz ponude (proizvodi)
+        file: content/proizvodi.json
+        fields:
+          - label: Proizvodi
+            name: proizvodi
+            widget: list
+            add_to_top: true
+            label_singular: proizvod
+            summary: "{{fields.brend}} {{fields.naziv}}"
+            fields:
+              - { label: Naziv, name: naziv, widget: string }
+              - { label: Brend, name: brend, widget: string, required: false, hint: "Piši isto kao u highlights: Bottega Veneta, Hermès, Chanel, Rene Caovilla, Golden Goose, Louis Vuitton" }
+              - { label: Kategorija, name: kategorija, widget: string, required: false, hint: "npr. Torbe, Obuća, Odeća. Od ovoga se sami prave filteri na sajtu." }
+              - { label: Veličine, name: velicine, widget: string, required: false, hint: "npr. EU 36–41 ili S, M, L" }
+              - { label: Slika, name: slika, widget: image, required: false, hint: "Najbolje uspravna slika, npr. 1200 × 1600" }
+              - { label: Slika je proizvod na beloj pozadini, name: belaPozadina, widget: boolean, default: false, required: false }
+              - { label: Link ka Instagram objavi, name: instagram, widget: string, required: false, hint: "Na objavi: ••• → Kopiraj link" }
+              - { label: Prikaži oznaku Primer, name: primer, widget: boolean, default: false, required: false, hint: "Isključi kad uneseš pravi proizvod" }
+
+      - name: izdvojeno
+        label: Brend u fokusu
+        file: content/izdvojeno.json
+        fields:
+          - { label: Brend, name: brend, widget: string }
+          - { label: Šta (npr. torbe), name: sta, widget: string }
+          - { label: Opis, name: opis, widget: text }
+          - { label: Stavke, name: tacke, widget: list, field: { label: Stavka, name: stavka, widget: string } }
+          - { label: Slika (proizvod na beloj pozadini, kvadrat), name: slika, widget: image, required: false }
+          - { label: Link ka Instagramu, name: instagram, widget: string, required: false }
+
+      - name: highlights
+        label: Highlights (krugovi)
+        file: content/highlights.json
+        fields:
+          - label: Highlights
+            name: highlights
+            widget: list
+            label_singular: krug
+            summary: "{{fields.naziv}}"
+            fields:
+              - { label: Naziv ispod kruga, name: naziv, widget: string }
+              - { label: Slika u krugu, name: slika, widget: image, required: false }
+              - { label: Ikonica ako nema slike, name: ikona, widget: select, options: ["", Obuća, Odeća, Aksesoari], required: false }
+              - { label: Šta prikazuje (kategorija ili brend; Sve za sve), name: filter, widget: string, required: false }
+              - { label: Vodi na Brend u fokusu, name: cilj, widget: select, options: ["", izdvojeno], required: false }

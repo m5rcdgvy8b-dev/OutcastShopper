@@ -2,7 +2,7 @@
 # >>> Promeni TVOJ-GITHUB-NALOG u svoje GitHub korisničko ime <<<
 backend:
   name: github
-  repo: TVOJ-GITHUB-NALOG/outcast-shopper
+  repo: m5rcdgvy8b-dev/outcast-shopper
   branch: main
   commit_messages:
     update: "Izmena: {{slug}}"

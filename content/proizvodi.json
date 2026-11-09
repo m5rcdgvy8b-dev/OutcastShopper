@@ -1,3 +1,13 @@
 {
-  "proizvodi": []
+  "proizvodi": [
+    {
+      "naziv": "Torba od pletene kože, crna",
+      "brend": "Bottega Veneta",
+      "kategorija": "Torbe",
+      "velicine": "",
+      "slika": "/slike/uploads/bottega-torba.jpg",
+      "belaPozadina": true,
+      "instagram": "https://www.instagram.com/outcast.shopper/"
+    }
+  ]
 }

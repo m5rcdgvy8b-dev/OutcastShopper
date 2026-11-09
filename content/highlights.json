@@ -1,10 +1,46 @@
 {
   "highlights": [
-    { "naziv": "Bottega", "slika": "slike/uploads/bottega-torba.jpg", "ikona": "", "filter": "Bottega Veneta", "cilj": "izdvojeno" },
-    { "naziv": "Hermès", "slika": "", "ikona": "", "filter": "Hermès", "cilj": "" },
-    { "naziv": "Chanel", "slika": "", "ikona": "", "filter": "Chanel", "cilj": "" },
-    { "naziv": "Rene Caovilla", "slika": "", "ikona": "", "filter": "Rene Caovilla", "cilj": "" },
-    { "naziv": "Golden Goose", "slika": "", "ikona": "", "filter": "Golden Goose", "cilj": "" },
-    { "naziv": "LV", "slika": "", "ikona": "", "filter": "Louis Vuitton", "cilj": "" }
+    {
+      "naziv": "Bottega",
+      "slika": "/slike/uploads/bottega-torba.jpg",
+      "ikona": "",
+      "filter": "Bottega Veneta",
+      "cilj": "izdvojeno"
+    },
+    {
+      "naziv": "Hermès",
+      "slika": "",
+      "ikona": "",
+      "filter": "Hermès",
+      "cilj": ""
+    },
+    {
+      "naziv": "Chanel",
+      "slika": "",
+      "ikona": "",
+      "filter": "Chanel",
+      "cilj": ""
+    },
+    {
+      "naziv": "Rene Caovilla",
+      "slika": "",
+      "ikona": "",
+      "filter": "Rene Caovilla",
+      "cilj": ""
+    },
+    {
+      "naziv": "Golden Goose",
+      "slika": "",
+      "ikona": "",
+      "filter": "Golden Goose",
+      "cilj": ""
+    },
+    {
+      "naziv": "LV",
+      "slika": "",
+      "ikona": "",
+      "filter": "Louis Vuitton",
+      "cilj": ""
+    }
   ]
 }

@@ -500,7 +500,7 @@ footer{padding-block:64px 120px}
 <a class="btn orange sticky-cta" id="stickyCta" href="https://ig.me/m/outcast.shopper" target="_blank" rel="noopener">Piši nam na Instagramu</a>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<script id="fallback">window.FALLBACK={"proizvodi":[],"izdvojeno":{"brend":"Bottega Veneta","sta":"torbe","opis":"Prepoznatljiva pletena koža i čiste linije. Pronalazimo model, boju i veličinu koju želiš i šaljemo ti ličnu ponudu.","tacke":["Pletena koža, bezvremenski dizajn","Različiti modeli i boje po želji","Nabavka po porudžbini, bez obaveze"],"slika":"slike/uploads/bottega-torba.jpg","instagram":"https://www.instagram.com/outcast.shopper/"},"highlights":[{"naziv":"Bottega","slika":"slike/uploads/bottega-torba.jpg","ikona":"","filter":"Bottega Veneta","cilj":"izdvojeno"},{"naziv":"Hermès","slika":"","ikona":"","filter":"Hermès","cilj":""},{"naziv":"Chanel","slika":"","ikona":"","filter":"Chanel","cilj":""},{"naziv":"Rene Caovilla","slika":"","ikona":"","filter":"Rene Caovilla","cilj":""},{"naziv":"Golden Goose","slika":"","ikona":"","filter":"Golden Goose","cilj":""},{"naziv":"LV","slika":"","ikona":"","filter":"Louis Vuitton","cilj":""}]};</script>
+<script id="fallback">window.FALLBACK={"proizvodi":[{"naziv":"Torba od pletene kože, crna","brend":"Bottega Veneta","kategorija":"Torbe","velicine":"","slika":"/slike/uploads/bottega-torba.jpg","belaPozadina":true,"instagram":"https://www.instagram.com/outcast.shopper/"}],"izdvojeno":{"brend":"Bottega Veneta","sta":"torbe","opis":"Prepoznatljiva pletena koža i čiste linije. Pronalazimo model, boju i veličinu koju želiš i šaljemo ti ličnu ponudu.","tacke":["Pletena koža, bezvremenski dizajn","Različiti modeli i boje po želji","Nabavka po porudžbini, bez obaveze"],"slika":"/slike/uploads/bottega-torba.jpg","instagram":"https://www.instagram.com/outcast.shopper/"},"highlights":[{"naziv":"Bottega","slika":"/slike/uploads/bottega-torba.jpg","ikona":"","filter":"Bottega Veneta","cilj":"izdvojeno"},{"naziv":"Hermès","slika":"","ikona":"","filter":"Hermès","cilj":""},{"naziv":"Chanel","slika":"","ikona":"","filter":"Chanel","cilj":""},{"naziv":"Rene Caovilla","slika":"","ikona":"","filter":"Rene Caovilla","cilj":""},{"naziv":"Golden Goose","slika":"","ikona":"","filter":"Golden Goose","cilj":""},{"naziv":"LV","slika":"","ikona":"","filter":"Louis Vuitton","cilj":""}]};</script>
 <script>
 function boot(){
   var $ = function(id){ return document.getElementById(id); };
@@ -535,14 +535,24 @@ function boot(){
   };
   function num(s){ var n = parseInt(String(s||"").replace(/\D/g,""),10); return isNaN(n) ? 0 : n; }
   function el(tag, cls, text){ var e=document.createElement(tag); if(cls) e.className=cls; if(text!=null) e.textContent=text; return e; }
+  // Photos: on Netlify they go through the image CDN (resized, compressed); falls back to the original file
+  var CDN = /\.netlify\.app$/.test(location.hostname) || window.NETLIFY_IMAGES === true;
+  function setSrc(im, src, w, onFail){
+    var local = /^\/?slike\//.test(src || "");
+    im.addEventListener("error", function(){
+      if (im.dataset.retry !== "1" && CDN && local){ im.dataset.retry = "1"; im.src = src; }
+      else if (onFail) onFail();
+    });
+    im.src = (CDN && local) ? "/.netlify/images?url=" + encodeURIComponent(src.charAt(0) === "/" ? src : "/" + src) + "&w=" + w + "&q=80" : src;
+  }
   function placeholder(p){ var d=el("div","ph"); d.innerHTML = ICONS[p.kategorija] || ICONS["Aksesoari"]; return d; }
 
   function card(p){
     var a = el("article","prod");
     var box = el("div","prod-img");
     if (p.slika){
-      var img = new Image(); img.src = p.slika; img.alt = p.naziv || ""; img.loading = "lazy";
-      img.addEventListener("error", function(){ img.replaceWith(placeholder(p)); });
+      var img = new Image(); img.alt = p.naziv || ""; img.loading = "lazy";
+      setSrc(img, p.slika, 900, function(){ img.replaceWith(placeholder(p)); });
       box.appendChild(img);
     } else box.appendChild(placeholder(p));
     if (p.belaPozadina && box.querySelector("img")) box.querySelector("img").classList.add("contain");
@@ -642,8 +652,8 @@ function boot(){
     (F.tacke || []).forEach(function(x){ $("featList").appendChild(el("li", null, x)); });
     var fi = $("featImg");
     if (F.slika){
-      var im = new Image(); im.src = F.slika; im.alt = F.brend + " " + (F.sta || "");
-      im.addEventListener("error", function(){ fi.innerHTML = BAG; });
+      var im = new Image(); im.alt = F.brend + " " + (F.sta || "");
+      setSrc(im, F.slika, 1400, function(){ fi.innerHTML = BAG; });
       fi.appendChild(im);
     } else fi.innerHTML = BAG;
     if (F.instagram) $("featIg").href = F.instagram;
@@ -662,8 +672,8 @@ function boot(){
     var b = el("button","hl"); b.type = "button";
     var ring = el("span","hl-ring"), inner = el("span","hl-in");
     if (h.slika){
-      var im = new Image(); im.src = h.slika; im.alt = "";
-      im.addEventListener("error", function(){ im.replaceWith(el("span","hl-word",h.naziv)); });
+      var im = new Image(); im.alt = "";
+      setSrc(im, h.slika, 240, function(){ im.replaceWith(el("span","hl-word",h.naziv)); });
       inner.appendChild(im);
     } else if (h.ikona && ICONS[h.ikona]) inner.innerHTML = ICONS[h.ikona];
     else inner.appendChild(el("span","hl-word",h.naziv));

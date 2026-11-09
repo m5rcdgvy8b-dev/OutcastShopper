@@ -1,0 +1,4 @@
+# Pri svakom objavljivanju Netlify spaja proizvode i brendove iz admina u fajlove za sajt
+[build]
+  command = "python3 scripts/spoji_sadrzaj.py"
+  publish = "."

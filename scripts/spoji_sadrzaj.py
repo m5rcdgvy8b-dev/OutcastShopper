@@ -99,4 +99,10 @@ ponuda = html.replace(
 with open(path("ponuda.html"), "w", encoding="utf-8") as f:
     f.write(ponuda)
 
+# Build marker (not in git): shows when the site was last assembled on Netlify
+import datetime
+write_json(path("content", "objavljeno.json"), {
+    "vreme": datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
+    "proizvoda": len(products), "brendova": len(highlights)})
+
 print("Spojeno: %d proizvoda, %d brendova" % (len(products), len(highlights)))

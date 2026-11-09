@@ -48,14 +48,13 @@ for p in glob.glob(path("content", "proizvodi", "*.json")):
         "brend": text(d.get("brend")),
         "kategorija": text(d.get("kategorija")),
         "velicine": text(d.get("velicine")),
+        "opis": text(d.get("opis")),
         "slika": text(d.get("image")) or text(d.get("slika")),
         "belaPozadina": bool(d.get("belaPozadina")),
         "instagram": text(d.get("instagram")),
-        "_datum": text(d.get("datum")),
+        "datum": text(d.get("datum")),
     })
-products.sort(key=lambda x: (x["_datum"], x["naziv"]), reverse=True)
-for x in products:
-    del x["_datum"]
+products.sort(key=lambda x: (x["datum"], x["naziv"]), reverse=True)
 
 # Brands -> highlight circles, ordered by "redosled"
 brands = []

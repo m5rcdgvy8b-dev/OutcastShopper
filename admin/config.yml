@@ -79,6 +79,11 @@ collections:
         widget: string
         required: false
         hint: "Opciono, npr. EU 36–41 ili S, M, L"
+      - label: "Kratak opis"
+        name: opis
+        widget: text
+        required: false
+        hint: "Opciono. Vidi se kad posetilac klikne na artikal, npr. boja, materijal, stanje. Dve do tri rečenice su dovoljne."
       - label: "Fotografija je na beloj pozadini"
         name: belaPozadina
         widget: boolean

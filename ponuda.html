@@ -308,6 +308,21 @@ footer{padding-block:64px 120px}
 .prod-empty{grid-column:1/-1;display:grid;justify-items:start;gap:18px;padding:24px 0 8px;font-size:18px;font-weight:300;color:var(--muted)}
 .prod-empty p{margin:0;max-width:48ch}
 .more{display:flex;justify-content:center;margin-top:52px}
+/* Product popup */
+.prod-img[role=button],.prod-name{cursor:pointer}
+.badge.new{letter-spacing:.08em}
+.pm{border:0;padding:0;border-radius:30px;width:min(920px,calc(100vw - 24px));max-height:calc(100vh - 24px);max-height:calc(100dvh - 24px);overflow:auto;background:var(--bg);color:var(--ink);box-shadow:var(--shadow-lg)}
+.pm[open]{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.pm::backdrop{background:rgba(18,17,16,.55);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.pm-img{position:relative;background:#fff;min-height:360px}
+.pm-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.pm-img img.contain{object-fit:contain;padding:6%}
+.pm-img .ph{position:absolute;inset:0}
+.pm-body{display:flex;flex-direction:column;gap:8px;justify-content:center;padding:clamp(24px,4vw,44px)}
+.pm-body h3{font-size:clamp(28px,3.4vw,40px)}
+.pm-desc{margin:6px 0 4px;color:var(--muted);font-weight:300;font-size:17px;line-height:1.5;white-space:pre-line}
+.pm-x{position:absolute;top:12px;right:12px;z-index:2;width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:var(--glass-strong);color:var(--ink);font-size:24px;line-height:1;cursor:pointer;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+@media (max-width:760px){.pm[open]{grid-template-columns:1fr}.pm-img{min-height:0;aspect-ratio:4/5;max-height:50vh;max-height:50dvh}}
 /* Follow card */
 .follow{border-radius:36px;padding:clamp(32px,6vw,64px) clamp(22px,5vw,56px);display:grid;justify-items:center;text-align:center;gap:14px}
 .follow .label{margin-bottom:2px}
@@ -513,10 +528,22 @@ footer{padding-block:64px 120px}
   </div>
 </footer>
 
+<dialog class="pm" id="pm" aria-labelledby="pmTitle">
+  <button class="pm-x" id="pmX" type="button" aria-label="Zatvori">×</button>
+  <div class="pm-img" id="pmImg"></div>
+  <div class="pm-body">
+    <small class="prod-cat" id="pmCat"></small>
+    <h3 id="pmTitle"></h3>
+    <p class="pm-desc" id="pmDesc"></p>
+    <span class="prod-po">Cena po dogovoru</span>
+    <div class="prod-actions" id="pmActions"></div>
+  </div>
+</dialog>
+
 <a class="btn orange sticky-cta" id="stickyCta" href="https://ig.me/m/outcast.shopper" target="_blank" rel="noopener">Piši nam na Instagramu</a>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<script id="fallback">window.FALLBACK={"proizvodi":[{"naziv":"Torba od pletene kože, crna","brend":"Bottega Veneta","kategorija":"Torbe","velicine":"","slika":"/slike/uploads/bottega-torba.jpg","belaPozadina":true,"instagram":"https://www.instagram.com/outcast.shopper/"}],"izdvojeno":{"brend":"Bottega Veneta","sta":"torbe","opis":"Prepoznatljiva pletena koža i čiste linije. Pronalazimo model, boju i veličinu koju želiš i šaljemo ti ličnu ponudu.","tacke":["Pletena koža, bezvremenski dizajn","Različiti modeli i boje po želji","Nabavka po porudžbini, bez obaveze"],"slika":"/slike/uploads/bottega-torba.jpg","instagram":"https://www.instagram.com/outcast.shopper/"},"highlights":[{"naziv":"Bottega","slika":"/slike/uploads/bottega-torba.jpg","ikona":"","filter":"Bottega Veneta","cilj":"izdvojeno"},{"naziv":"Hermès","slika":"","ikona":"","filter":"Hermès","cilj":""},{"naziv":"Chanel","slika":"","ikona":"","filter":"Chanel","cilj":""},{"naziv":"Rene Caovilla","slika":"","ikona":"","filter":"Rene Caovilla","cilj":""},{"naziv":"Golden Goose","slika":"","ikona":"","filter":"Golden Goose","cilj":""},{"naziv":"LV","slika":"","ikona":"","filter":"Louis Vuitton","cilj":""}]};</script>
+<script id="fallback">window.FALLBACK={"proizvodi":[{"naziv":"Torba od pletene kože, crna","brend":"Bottega Veneta","kategorija":"Torbe","velicine":"","opis":"","slika":"/slike/uploads/bottega-torba.jpg","belaPozadina":true,"instagram":"https://www.instagram.com/outcast.shopper/","datum":"2026-11-09T12:00:00.000Z"}],"izdvojeno":{"brend":"Bottega Veneta","sta":"torbe","opis":"Prepoznatljiva pletena koža i čiste linije. Pronalazimo model, boju i veličinu koju želiš i šaljemo ti ličnu ponudu.","tacke":["Pletena koža, bezvremenski dizajn","Različiti modeli i boje po želji","Nabavka po porudžbini, bez obaveze"],"slika":"/slike/uploads/bottega-torba.jpg","instagram":"https://www.instagram.com/outcast.shopper/"},"highlights":[{"naziv":"Bottega","slika":"/slike/uploads/bottega-torba.jpg","ikona":"","filter":"Bottega Veneta","cilj":"izdvojeno"},{"naziv":"Hermès","slika":"","ikona":"","filter":"Hermès","cilj":""},{"naziv":"Chanel","slika":"","ikona":"","filter":"Chanel","cilj":""},{"naziv":"Rene Caovilla","slika":"","ikona":"","filter":"Rene Caovilla","cilj":""},{"naziv":"Golden Goose","slika":"","ikona":"","filter":"Golden Goose","cilj":""},{"naziv":"LV","slika":"","ikona":"","filter":"Louis Vuitton","cilj":""}]};</script>
 <script>
 function boot(){
   var $ = function(id){ return document.getElementById(id); };
@@ -563,6 +590,67 @@ function boot(){
   }
   function placeholder(p){ var d=el("div","ph"); d.innerHTML = ICONS[p.kategorija] || ICONS["Aksesoari"]; return d; }
 
+  // "Pošalji upit": kopira poruku, pa otvara Instagram DM (isto na kartici i u prozorčiću)
+  function inquiryBtn(p, cls){
+    var btn = el("a", cls, "Pošalji upit");
+    btn.href = "https://ig.me/m/outcast.shopper"; btn.target = "_blank"; btn.rel = "noopener";
+    btn.addEventListener("click", function(){
+      var msg = "Zdravo Outcast! Zanima me: " + [p.brend, p.naziv].filter(Boolean).join(" ") + ". Možete li mi poslati ponudu? Moja veličina je: ";
+      if (navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(msg).then(function(){ toast("Poruka je kopirana. Nalepi je u Instagram DM."); }, function(){});
+      }
+    });
+    return btn;
+  }
+  function igLink(p){
+    var ig = el("a","link-ig","Objava na Instagramu ↗");
+    ig.href = p.instagram; ig.target = "_blank"; ig.rel = "noopener";
+    return ig;
+  }
+  // "Novo": artikal dodat u poslednjih 14 dana (po datumu iz admina)
+  function isNew(p){
+    var t = Date.parse(p.datum), age = Date.now() - t;
+    return !isNaN(t) && age < 14*864e5 && age > -864e5;
+  }
+
+  // Prozorčić sa velikom slikom i opisom
+  var dlg = $("pm"), lastFocus = null;
+  function openItem(p, from){
+    if (!dlg || typeof dlg.showModal !== "function") return;
+    lastFocus = from || null;
+    var imgBox = $("pmImg"); imgBox.innerHTML = "";
+    if (p.slika){
+      var im = new Image(); im.alt = p.naziv || "";
+      setSrc(im, p.slika, 1400, function(){ im.replaceWith(placeholder(p)); });
+      if (p.belaPozadina) im.classList.add("contain");
+      imgBox.appendChild(im);
+    } else imgBox.appendChild(placeholder(p));
+    $("pmCat").textContent = [p.brend || p.kategorija, p.velicine].filter(Boolean).join(" · ");
+    $("pmTitle").textContent = p.naziv || "";
+    $("pmDesc").textContent = p.opis || "";
+    $("pmDesc").hidden = !p.opis;
+    var act = $("pmActions"); act.innerHTML = "";
+    act.appendChild(inquiryBtn(p, "btn"));
+    if (p.instagram) act.appendChild(igLink(p));
+    dlg.appendChild($("toast"));            // da se poruka vidi iznad prozorčića
+    document.documentElement.style.overflow = "hidden";
+    dlg.showModal();
+    dlg.scrollTop = 0;
+  }
+  if (dlg){
+    dlg.addEventListener("close", function(){
+      document.documentElement.style.overflow = "";
+      document.body.appendChild($("toast"));
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    });
+    dlg.addEventListener("click", function(e){
+      if (e.target !== dlg) return;          // klik na pozadinu cilja sam dialog
+      var r = dlg.getBoundingClientRect();
+      if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) dlg.close();
+    });
+    $("pmX").addEventListener("click", function(){ dlg.close(); });
+  }
+
   function card(p){
     var a = el("article","prod");
     var box = el("div","prod-img");
@@ -572,29 +660,25 @@ function boot(){
       box.appendChild(img);
     } else box.appendChild(placeholder(p));
     if (p.belaPozadina && box.querySelector("img")) box.querySelector("img").classList.add("contain");
-    box.appendChild(el("span", p.primer ? "badge ex" : "badge sug", p.primer ? "Primer" : "Predlog"));
+    box.appendChild(p.primer ? el("span","badge ex","Primer") : isNew(p) ? el("span","badge new","✦ Novo") : el("span","badge sug","Predlog"));
     a.appendChild(box);
     var b = el("div","prod-body");
     b.appendChild(el("small","prod-cat",[p.brend || p.kategorija, p.velicine].filter(Boolean).join(" · ")));
-    b.appendChild(el("h3",null,p.naziv || ""));
+    var h3 = el("h3","prod-name",p.naziv || "");
+    b.appendChild(h3);
     b.appendChild(el("span","prod-po","Cena po dogovoru"));
     var act = el("div","prod-actions");
-    var btn = el("a","btn small","Pošalji upit");
-    btn.href = "https://ig.me/m/outcast.shopper"; btn.target = "_blank"; btn.rel = "noopener";
-    btn.addEventListener("click", function(){
-      var msg = "Zdravo Outcast! Zanima me: " + [p.brend, p.naziv].filter(Boolean).join(" ") + ". Možete li mi poslati ponudu? Moja veličina je: ";
-      if (navigator.clipboard && navigator.clipboard.writeText){
-        navigator.clipboard.writeText(msg).then(function(){ toast("Poruka je kopirana. Nalepi je u Instagram DM."); }, function(){});
-      }
-    });
-    act.appendChild(btn);
-    if (p.instagram){
-      var ig = el("a","link-ig","Objava na Instagramu ↗");
-      ig.href = p.instagram; ig.target = "_blank"; ig.rel = "noopener";
-      act.appendChild(ig);
-    }
+    act.appendChild(inquiryBtn(p, "btn small"));
+    if (p.instagram) act.appendChild(igLink(p));
     b.appendChild(act);
     a.appendChild(b);
+    // Klik na sliku ili naziv otvara prozorčić
+    var open = function(){ openItem(p, box); };
+    box.setAttribute("role","button"); box.tabIndex = 0; box.setAttribute("aria-haspopup","dialog");
+    box.setAttribute("aria-label","Otvori: " + (p.naziv || "artikal"));
+    box.addEventListener("click", open);
+    box.addEventListener("keydown", function(e){ if (e.key === "Enter" || e.key === " "){ e.preventDefault(); open(); } });
+    h3.addEventListener("click", open);
     return a;
   }
   var PAGE = window.PAGE || "home";

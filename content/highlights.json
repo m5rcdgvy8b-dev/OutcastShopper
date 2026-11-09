@@ -1,14 +1,16 @@
 {
   "highlights": [
     {
-      "naziv": "Bottega",
-      "slika": "/slike/uploads/bottega-torba.jpg",
+      "naziv": "Bottega Veneta",
+      "oznaka": "B",
+      "slika": "",
       "ikona": "",
       "filter": "Bottega Veneta",
       "cilj": "izdvojeno"
     },
     {
       "naziv": "Hermès",
+      "oznaka": "H",
       "slika": "",
       "ikona": "",
       "filter": "Hermès",
@@ -16,6 +18,7 @@
     },
     {
       "naziv": "Chanel",
+      "oznaka": "C",
       "slika": "",
       "ikona": "",
       "filter": "Chanel",
@@ -23,6 +26,7 @@
     },
     {
       "naziv": "Rene Caovilla",
+      "oznaka": "RC",
       "slika": "",
       "ikona": "",
       "filter": "Rene Caovilla",
@@ -30,13 +34,15 @@
     },
     {
       "naziv": "Golden Goose",
+      "oznaka": "GG",
       "slika": "",
       "ikona": "",
       "filter": "Golden Goose",
       "cilj": ""
     },
     {
-      "naziv": "LV",
+      "naziv": "Louis Vuitton",
+      "oznaka": "LV",
       "slika": "",
       "ikona": "",
       "filter": "Louis Vuitton",

@@ -67,7 +67,8 @@ for p in glob.glob(path("content", "brendovi", "*.json")):
     except (TypeError, ValueError):
         order = 99
     brands.append((order, text(d.get("naziv")), {
-        "naziv": text(d.get("oznaka")) or text(d.get("naziv")),
+        "naziv": text(d.get("naziv")),
+        "oznaka": text(d.get("oznaka")),
         "slika": text(d.get("image")),
         "ikona": "",
         "filter": text(d.get("naziv")),
